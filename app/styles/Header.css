@@ -1,0 +1,45 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.login-register-links {
+    display: flex;
+    align-items: center;
+}
+
+.login-link,
+.register-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.login-link:hover,
+.register-link:hover {
+    text-decoration: underline;
+}
+
+.divider {
+    margin: 0 10px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar .p-inputtext {
+    margin-right: 10px;
+    width: 200px;
+    /* Adjust width as needed */
+}
