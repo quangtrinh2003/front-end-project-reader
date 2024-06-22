@@ -32,7 +32,7 @@ export default function Upload() {
     try {
       // Send POST request to create novel
       const response = await axios.post(
-        "http://localhost:3001/api/v1/novels/upload",
+        `${process.env.URL}/api/v1/novels/upload`,
         {
           title,
           author,

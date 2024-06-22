@@ -18,7 +18,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/v1/users/login",
+        `${process.env.URL}/api/v1/users/login`,
         {
           username,
           password,

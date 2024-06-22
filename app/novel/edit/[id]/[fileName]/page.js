@@ -39,7 +39,7 @@ export default function EditChapter({ params }) {
       const data = `${editedChapterName}\n${editedText}`;
       // Send POST request to create novel
       const response = await axios.patch(
-        `http://localhost:3001/api/v1/novels/edit/${novelUrl}/${fileName}`,
+        `${process.env.URL}/api/v1/novels/edit/${novelUrl}/${fileName}`,
         {
           data,
         },

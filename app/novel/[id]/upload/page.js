@@ -36,7 +36,7 @@ export default function UploadChapter({ params }) {
     try {
       const data = `${chapterName}\n${text}`;
       const response = await axios.post(
-        `http://localhost:3001/api/v1/novels/upload/${novelUrl}`,
+        `${process.env.URL}/api/v1/novels/upload/${novelUrl}`,
         { data },
         {
           headers: {

@@ -4,6 +4,6 @@ import axios from "axios";
 
 export default async function getNovels() {
   return await axios
-    .get("http://localhost:3001/api/v1/novels")
+    .get(`${process.env.URL}/api/v1/novels`)
     .then((response) => response.data);
 }
