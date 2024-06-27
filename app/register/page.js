@@ -33,7 +33,7 @@ export default function Register() {
 
       // Make POST request to register endpoint
       const response = await axios.post(
-        `${process.env.URL}/api/v1/users/register`,
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/users/register`,
         {
           username,
           password,

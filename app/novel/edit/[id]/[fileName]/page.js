@@ -27,8 +27,10 @@ export default function EditChapter({ params }) {
         }
         setJwt(token.value);
       }
-      const data = await getChapter(novelUrl, fileName);
-      setText(data.split("\n"));
+      let data = await getChapter(novelUrl, fileName);
+      data = data.split("\n");
+      setEditedChapterName(data[0]);
+      setEditedText(data.slice(1));
     })();
   }, []);
 
@@ -37,9 +39,11 @@ export default function EditChapter({ params }) {
 
     try {
       const data = `${editedChapterName}\n${editedText}`;
+      console.log(data);
+
       // Send POST request to create novel
       const response = await axios.patch(
-        `${process.env.URL}/api/v1/novels/edit/${novelUrl}/${fileName}`,
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/novels/edit/${novelUrl}/${fileName}`,
         {
           data,
         },
@@ -69,8 +73,8 @@ export default function EditChapter({ params }) {
         <InputTextarea
           autoResize
           id="chapterName"
-          defaultValue={text[0]}
-          onChange={(e) => setEditedChapterName(e.target.value)}
+          defaultValue={editedChapterName}
+          onInput={(e) => setEditedChapterName(e.target.value)}
           readOnly={false}
           required
         />
@@ -78,10 +82,10 @@ export default function EditChapter({ params }) {
         <p>
           <InputTextarea
             cols={80}
-            rows={text.length * 20}
+            rows={50}
             id="content"
-            defaultValue={text.slice(1)}
-            onChange={(e) => setEditedText(e.target.value)}
+            defaultValue={editedText}
+            onInput={(e) => setEditedText(e.target.value)}
             required
           />
         </p>

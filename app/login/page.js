@@ -18,7 +18,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        `${process.env.URL}/api/v1/users/login`,
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/users/login`,
         {
           username,
           password,
@@ -38,7 +38,8 @@ export default function Login() {
     }
   };
 
-  const handleRegisterClick = async () => {
+  const handleRegisterClick = async (e) => {
+		e.preventDefault();
     await navigateRegister();
   };
 
@@ -46,7 +47,7 @@ export default function Login() {
     <div>
       <Toast ref={toast}></Toast>
       <div className={styles.container}>
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className={styles.form}>
             <div>
               <label>Username </label>
@@ -70,7 +71,8 @@ export default function Login() {
               />
             </div>
             <div className={styles.buttonAlignment}>
-              <Button type="submit" raised label="Login" />
+              <Button type="submit" raised label="Login" 
+								onClick={handleSubmit} />
               <Button
                 onClick={handleRegisterClick}
                 label="Register"
