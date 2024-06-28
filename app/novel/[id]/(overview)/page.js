@@ -5,6 +5,9 @@ import getNovel from "@/app/utils/getNovel";
 import Link from "next/link";
 import checkJWT from "@/app/utils/checkJWT";
 import checkAuthorized from "@/app/utils/checkAuthorized";
+import deleteNovel from "@/app/utils/deleteNovel";
+import { redirect } from "next/navigation";
+import { navigateHomepage } from "@/app/utils/navigate";
 
 export default function Novel({ params }) {
   const [novelData, setNovelData] = useState([]);
@@ -20,16 +23,26 @@ export default function Novel({ params }) {
         setIsAuthorized(status);
       }
 
-      const data = await getNovel(novelUrl);
+      const data = await getNovel(novelUrl, token);
       setNovelData(data.data);
     })();
   }, []);
+
+  const handleDelete = async function (e) {
+    e.preventDefault();
+    const token = await checkJWT();
+    await deleteNovel(novelUrl, token.value);
+    await navigateHomepage();
+  };
 
   if (isAuthorized) {
     return (
       <div>
         <div>
           <Link href={`/novel/${novelUrl}/upload`}>Upload chapter</Link>
+        </div>
+        <div>
+          <a onClick={handleDelete}>Delete novel</a>
         </div>
         <div>
           {novelData.map((e) => {
